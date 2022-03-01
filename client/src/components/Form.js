@@ -34,21 +34,21 @@ export default function Form() {
 	}
     
     async function handleSendApiKey() {
-        const response = await httpGetApiKey(apiKey);
-
+        
         if (!apiKey) {
             toast('API key is required!', toastConfig);
             return;
         }
-
-        console.log('response-client :>> ', response);
+        
+        const response = await httpGetApiKey(apiKey);
+        
         if (response.authorized) {
             setAuthorized(true);
             setApiKey('');
-        }
+        } 
 
         if (!response.authorized) {
-            //TODO
+            toast('Sending API key failed. Check internet connection or try it later or use a hammer.', toastConfig);
         }
     }
 
@@ -69,9 +69,8 @@ export default function Form() {
             setInputData(initialState);
             toast('Data has been successfully submitted!', toastConfig);
         }
-
         if (response.error) {
-            console.log("Data hasn't been submited");
+            console.log("Data hasn't been submitted");
         }
     }
 

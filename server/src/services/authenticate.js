@@ -8,30 +8,46 @@ const { BASE_URL, ENDPOINTINFO } = process.env;
 
 async function authenticateUser(key) {
     
-    const response = await axios.get(`${BASE_URL}${ENDPOINTINFO}`, {
-        params: {
-            apiKey: key
-        }
-    });
+    try {
+        const response = await axios.get(`${BASE_URL}${ENDPOINTINFO}`, {
+            params: {
+                apiKey: key
+            }
+        });
+        
+        if (response.status !== 200) {
+            console.log(`
+                Getting token failed...
+                Error: ${response.status} ${response.statusText}
 
-    if (response.status !== 200) {
-        console.log('Getting token failed...');
-        console.log(`Error: ${response.status} ${response.statusText}`);
+                Check internet connection.
+            `);
+            return false;
+        }
+
+        const token = response.data.authorization.access_token;
+        
+        // simulates saving access token to some session database
+        if (token) {
+            const user = { // hard-coded testing user session
+                userId: 'testId',
+                userName: 'testUser',
+                token
+            };
+            saveSession(user);
+            return true;
+        }
+
+    } catch(err){
+        console.error(`
+            Something really bad happened. 
+            Here is your error:
+            ${err}
+        `);
         return false;
     }
 
-    const token = response.data.authorization.access_token;
 
-    // simulates saving access token to some session database
-    if (token) {
-        const user = { // hard-coded testing user session
-            userId: 'testId',
-            userName: 'testUser',
-            token
-        };
-        saveSession(user);
-        return true;
-    }
 }
 
 module.exports = {

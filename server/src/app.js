@@ -23,7 +23,7 @@ app.use(morgan("combined")); // HTTP request logger middleware
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..', 'public'))); // servers frontend to client
 
 
 app.post('/auth', httpGetApiKey);
