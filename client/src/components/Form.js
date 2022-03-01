@@ -41,14 +41,13 @@ export default function Form() {
         }
         
         const response = await httpGetApiKey(apiKey);
-        
+    
         if (response.authorized) {
             setAuthorized(true);
             setApiKey('');
         } 
-
         if (!response.authorized) {
-            toast('Sending API key failed. Check internet connection or try it later or use a hammer.', toastConfig);
+            toast('Sending API key failed. Check internet connection or try it later or use a good old hammer.', toastConfig);
         }
     }
 
@@ -61,18 +60,19 @@ export default function Form() {
         const userData = {
             email: email,
             name: name
-        }
-
+        };
         const response = await httpScheduleInterview(userData);
 
         if (response.ok) {
             setInputData(initialState);
             toast('Data has been successfully submitted!', toastConfig);
         }
-        if (response.error) {
-            console.log("Data hasn't been submitted");
+        if (!response.ok) {
+            console.log("Data hasn't been submitted. Check internet connection or try it later or use a good old hammer.", toastConfig);
         }
     }
+
+    //TODO: email form validation
 
     return (<>
     <Typography variant='h4' sx={titleSx}>Assignment</Typography>
@@ -100,7 +100,7 @@ export default function Form() {
                 id='email'
                 name='email'
                 variant='outlined'
-                type='text'
+                type='email'
                 margin='dense'
                 disabled={!authorized}
             />

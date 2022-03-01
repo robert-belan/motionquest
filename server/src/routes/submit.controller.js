@@ -19,19 +19,19 @@ async function httpScheduleInterview(req, res) {
         url: `${BASE_URL}${ENDPOINTTEST}`,
         headers: {
             'Content-Type': "application/json",
-            'Authorization': `Bearer ${user.token}`
-        },
+            'Authorization': `Bearer ${user.token}`,
         data: userData
-    });
+        }
+    }).catch( (error) => error.toJSON()); // Axios error handling
+
 
     if (response.status !== 200) {
-        console.error('Error: ', response.data);
-        return res
-            .status(response.status)
-            .json({ error: response.title });
+        console.log(`
+            Getting token failed...
+            Message: ${response.message}
+        `, response);
+        return res.json({ ok: false })
     }
-    
-    // console.log(response.data.confirmationText)
 
     return res.status(200).json({ ok: true });
 }
