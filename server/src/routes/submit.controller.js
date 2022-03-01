@@ -30,7 +30,7 @@ async function httpScheduleInterview(req, res) {
             Getting token failed...
             Message: ${response.message}
         `, response);
-        return res.json({ ok: false })
+        return res.json({ ok: false });
     }
 
     return res.status(200).json({ ok: true });
@@ -38,4 +38,4 @@ async function httpScheduleInterview(req, res) {
 
 module.exports = {
     httpScheduleInterview
-}
+};

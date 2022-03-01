@@ -1,4 +1,4 @@
-const db = [] // simulates sessions database, where access tokens are saved
+const db = []; // simulates sessions database, where access tokens are saved
 
 function saveSession(user) {
     db.push(user);

@@ -2,14 +2,13 @@ const { authenticateUser } = require('../services/authenticate');
 
 async function httpGetApiKey (req, res) {
     const apiKey = req.body.apiKey;
-    // const isAuthorized = await authenticateUser(apiKey);
+    const isAuthorized = await authenticateUser(apiKey);
 
     return res.status(200).json({
-        // authorized: isAuthorized
-        authorized: true
+        authorized: isAuthorized
     });
 }
 
 module.exports = {
     httpGetApiKey
-}
+};

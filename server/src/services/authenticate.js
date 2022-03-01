@@ -38,4 +38,4 @@ async function authenticateUser(key) {
 
 module.exports = {
     authenticateUser,
-}
+};
