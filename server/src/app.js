@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'public'))); // servers frontend to client
 
 
-app.post('/auth', httpGetApiKey);
+app.post('/auth', httpGetApiKey); 
 
 app.post('/submit', httpScheduleInterview);
 

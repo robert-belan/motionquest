@@ -1,4 +1,4 @@
-![MotionQuest Screenshot](./screenshot.jpg)
+![MotionQuest Screenshot](./.github/screenshot.jpg)
 
 # Usage:
 
